@@ -1,2 +1,6 @@
 log/*.log
 tmp/**/*
+id_rsa
+id_rsa.pub
+key
+key.pub

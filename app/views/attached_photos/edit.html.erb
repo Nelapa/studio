@@ -1,0 +1,12 @@
+<h1>Editing attached_photo</h1>
+
+<% form_for(@attached_photo,:html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @attached_photo %> |
+<%= link_to 'Back', attached_photos_path %>

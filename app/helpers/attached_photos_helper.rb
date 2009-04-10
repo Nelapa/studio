@@ -1,0 +1,2 @@
+module AttachedPhotosHelper
+end

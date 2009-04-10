@@ -1,0 +1,15 @@
+<p>
+  <b>Photo file name:</b>
+  <%=h @attached_photo.photo_file_name %>
+</p>
+
+<% if @attached_photo.photo.exists? then %>
+<p>Origin:<br /><%= image_tag @attached_photo.photo.url %></p>
+<p>Medium:<%= image_tag @attached_photo.photo.url(:medium) %></p>
+<% else %>
+<p> There are no photo's attached, upload one. </p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_attached_photo_path(@attached_photo) %> |
+<%= link_to 'Back', attached_photos_path %>

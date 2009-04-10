@@ -1,7 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :attached_photos
+
+  map.resources :photos
+
   map.resource :account, :controller => "users"
 
-  map.resources :users
+  map.resources :users, :has_many => :projects
 
   map.resources :projects
   
