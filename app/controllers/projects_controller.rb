@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @attached_photo = AttachedPhoto.new
   end
 
   # POST /projects
@@ -32,7 +33,8 @@ class ProjectsController < ApplicationController
  
     if @project.save
         flash[:notice] = 'Project was successfully created.'
-         redirect_to(@project) 
+         #redirect_to(@project) 
+         redirect_to new_project_attached_photo_path(@project)
     else
         render :action => "new" 
     end

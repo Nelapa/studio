@@ -11,7 +11,28 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %><br/>
     Thumb <%= f.file_field :thumb %>
-  </p>
+    </p>
+<h2>Photos</h2>
+<% @project.attached_photos.each do |photo| %>
+  <div>
+    <b>Photo file name:</b>
+    <%=h photo.photo_file_name %><br>
+    <% if photo.photo.exists? then %>
+      <%= photo.id %>
+      <%= image_tag photo.photo.url %>
+      <%= link_to 'Delete', project_attached_photo_path(@project, photo), :method => :delete, :confirm => "Are you sure?"%>
+    <% else %>
+       There are no photo's attached, upload one.
+    <% end %>
+  </div>
+  
+
+    <hr />
+<% end %>
+
+<%= link_to 'New Photo', new_project_attached_photo_path(@project) %>
+<br />
+  
   <%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select author"}) %>
   
   <p>

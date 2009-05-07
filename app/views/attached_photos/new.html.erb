@@ -1,11 +1,8 @@
 <h1>New attached_photo</h1>
-
-<% form_for(@attached_photo,:html => { :multipart => true }) do |f| %>
+<% form_for(@attached_photo, :attached_photo, :url => project_attached_photos_path(@project),:html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
-  <p>
-    <%= f.submit 'Create' %>
+  <%= f.label 'Photo' %><br />
+  <%= f.file_field :photo %>
+  <%= f.submit 'Create' %>
   </p>
 <% end %>
-
-<%= link_to 'Back', attached_photos_path %>

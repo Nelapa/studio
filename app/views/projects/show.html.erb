@@ -10,9 +10,23 @@
 
 <% if @project.thumb.exists? then %>
 <p>Thumb:<%= image_tag @project.thumb.url %></p>
+
 <% else %>
 <p> There are no photo's attached, upload one. </p>
 <% end %>
+
+<p>
+
+
+<h2>Photos</h2>
+<% @project.attached_photos.each do |photo| %>
+    <% if photo.photo.exists? then %>
+       <%= image_tag photo.photo.url %>
+    <% end %>
+ <% end %>
+
+</p>
+
 
 <p>
   <b>Date:</b>

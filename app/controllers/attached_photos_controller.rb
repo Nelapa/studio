@@ -1,74 +1,22 @@
 class AttachedPhotosController < ApplicationController
-  # GET /attached_photos
-  # GET /attached_photos.xml
-  def index
-    @attached_photos = AttachedPhoto.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @attached_photos }
-    end
-  end
-
-  # GET /attached_photos/1
-  # GET /attached_photos/1.xml
-  def show
-    @attached_photo = AttachedPhoto.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @attached_photo }
-    end
-  end
-
-  # GET /attached_photos/new
-  # GET /attached_photos/new.xml
-  def new
-    @attached_photo = AttachedPhoto.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @attached_photo }
-    end
-  end
-
-  # GET /attached_photos/1/edit
-  def edit
-    @attached_photo = AttachedPhoto.find(params[:id])
-  end
-
   # POST /attached_photos
   # POST /attached_photos.xml
+  
+  def new
+    @attached_photo = AttachedPhoto.new
+    @project = Project.find(params[:project_id])
+  end
+    
   def create
     @attached_photo = AttachedPhoto.new(params[:attached_photo])
-
-    respond_to do |format|
+    @attached_photo.project_id = params[:project_id];
+    
       if @attached_photo.save
         flash[:notice] = 'AttachedPhoto was successfully created.'
-        format.html { redirect_to(@attached_photo) }
-        format.xml  { render :xml => @attached_photo, :status => :created, :location => @attached_photo }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @attached_photo.errors, :status => :unprocessable_entity }
+        flash[:error] = 'Error attaching photo'
       end
-    end
-  end
-
-  # PUT /attached_photos/1
-  # PUT /attached_photos/1.xml
-  def update
-    @attached_photo = AttachedPhoto.find(params[:id])
-
-    respond_to do |format|
-      if @attached_photo.update_attributes(params[:attached_photo])
-        flash[:notice] = 'AttachedPhoto was successfully updated.'
-        format.html { redirect_to(@attached_photo) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @attached_photo.errors, :status => :unprocessable_entity }
-      end
-    end
+      redirect_to project_path(Project.find(@attached_photo.project_id))
   end
 
   # DELETE /attached_photos/1
@@ -76,10 +24,8 @@ class AttachedPhotosController < ApplicationController
   def destroy
     @attached_photo = AttachedPhoto.find(params[:id])
     @attached_photo.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(attached_photos_url) }
-      format.xml  { head :ok }
-    end
+    @project = Project.find(params[:project_id])
+    redirect_to edit_project_path(@project)
   end
+  
 end

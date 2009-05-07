@@ -13,7 +13,7 @@
      Thumb <%= f.file_field :thumb %>
   </p>
   
-  <%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select autjor"}) %>
+  <%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select author"}) %>
 
   
   <p>

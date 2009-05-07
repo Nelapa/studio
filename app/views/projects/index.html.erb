@@ -1,7 +1,8 @@
 <h1>Listing projects</h1>
 
-<table>
+<table border=2>
   <tr>
+    <th>Thumb</th> 
     <th>Title</th>
     <th>Description</th>
     <th>Date</th>
@@ -9,6 +10,11 @@
 
 <% @projects.each do |project| %>
   <tr>
+    <td>
+      <% if project.thumb.exists? then %>
+        <%= image_tag project.thumb.url %>
+      <% end %>
+    </td>
     <td><%=h project.title %></td>
     <td><%=h project.description %></td>
     <td><%=h project.date %></td>
