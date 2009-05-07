@@ -6,6 +6,8 @@
 <%= form.text_field :surname%><br />
 <%= form.label :description%><br />
 <%= form.text_field :description%><br />
+Admin?
+<%= form.check_box :is_admin %><br />
 <br />
 <%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
 <%= form.password_field :password %><br />

@@ -1,12 +1,30 @@
-<h1>Edit My Account</h1>
+<h1>Edit User info</h1>
  
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Update" %>
+<% form_for @user, :url => account_path, :html => { :multipart => true } do |form| %>
+  <%= form.error_messages %>
+  <%= form.label :login %><br />
+<%= form.text_field :login %><br />
+<%= form.label :name %><br />
+<%= form.text_field :name %><br />
+<%= form.label :surname%><br />
+<%= form.text_field :surname%><br />
+<%= form.label :description%><br />
+<%= form.text_field :description%><br />
+
+<%= render :partial => 'thumb_form', :locals => { :form => form } %>
+Photo <%= form.file_field :photo %>
+
+Admin?
+<%= form.check_box :is_admin %><br />
+<br />
+<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
+<%= form.password_field :password %><br />
+<br />
+<%= form.label :password_confirmation %><br />
+<%= form.password_field :password_confirmation %><br />
+<br />
+  <%= form.submit "Update" %>
 <% end %>
  
-<br /><%= link_to "My Profile", account_path %>
-
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

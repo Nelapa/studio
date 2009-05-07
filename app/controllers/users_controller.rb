@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:show, :edit, :update]
+  before_filter :require_no_user, :only => [:new, :create] #Потом надо удалить!!!!
+  before_filter :require_user, :only => [:edit, :update]
 
   def index
     @users = User.all
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
    def show
-    @user = @current_user
+     @user = User.find_by_id(params[:id])
   end
 
   # GET /users/new
@@ -19,6 +19,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    #if (@current_user.is_admin)
+    #  @user = User.find_by_id(params[:id])
+    #else
+    #  @user = @current_user
+    #end
+    
     @user = @current_user
   end
 
@@ -37,11 +43,14 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     #to add administrative logic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    #@user = User.find(params[:id])
+    #@user = @current_user
+    
     @user = @current_user
 
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Account successfully updated.'
-      redirect_to account_url
+      redirect_to account_url(:id=>@user.id)
     else
       render :action => :edit
     end
