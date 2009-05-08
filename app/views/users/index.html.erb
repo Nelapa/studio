@@ -1,32 +1,22 @@
-<h1>Listing users</h1>
-
-<table>
-  <tr>
-    <th>Login</th>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Birth date</th>
-    <th>Decription</th>
-    <th>Is admin</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%=h user.login %></td>
-    <td><%=h user.name %></td>
-    <td><%=h user.surname %></td>
-    <td><%=h user.birth_date %></td>
-    <td><%=h user.description %></td>
-    <td><%=h user.is_admin %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <!--<% if current_user && current_user.is_admin %>-->
-    
-    <!--<td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>-->
-    <!--<% end %>-->
-    
-  </tr>
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
 <% end %>
-</table>
+<div id='mainHeader'>
+  <%= image_tag '/images/captions/studioTitle.png', :alt =>'Студия' %>
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>   
+<div id='content'>
+  <div id='description'>
+    <%= image_tag '/images/studio-main.png', :alt =>'Фотография интерьера', :id => 'studioImg' %>
+    <p>Ооооооооооооооооооочень длинное описание нас любимых</p>
+  </div>
 
-<br />
+
+<div id='people'>
+<% @users.each do |user| %>
+  <% link_to user_path(user), :class=> 'shadable' do %>
+    <%= image_tag user.thumb.url(:thumb), :class => 'preview', :alt => h(user.name+' '+user.surname) %>
+  <% end %>
+<% end %>
+</div>
+</div>

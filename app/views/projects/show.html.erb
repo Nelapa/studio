@@ -1,3 +1,13 @@
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
+<% end %>
+<div id='mainHeader' class = 'wide' >
+  <%= image_tag '/images/captions/projectsTitle.png', :alt =>'Проекты'%><br />
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>  
+
+<div id='content' style="width:758px">
+
 <p>
   <b>Title:</b>
   <%=h @project.title %>
@@ -9,7 +19,8 @@
 </p>
 
 <% if @project.thumb.exists? then %>
-<p>Thumb:<%= image_tag @project.thumb.url %></p>
+<p><b>Thumb</b></p>
+<p><%= image_tag @project.thumb.url %></p>
 
 <% else %>
 <p> There are no photo's attached, upload one. </p>
@@ -18,7 +29,7 @@
 <p>
 
 
-<h2>Photos</h2>
+
 <% @project.attached_photos.each do |photo| %>
     <% if photo.photo.exists? then %>
        <%= image_tag photo.photo.url %>
@@ -39,5 +50,6 @@
 </p>
 
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Edit', edit_project_path(@project) %>
+
+</div>

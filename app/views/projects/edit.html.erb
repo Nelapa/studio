@@ -1,48 +1,52 @@
-<h1>Editing project</h1>
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
+<% end %>
+<div id='mainHeader' class = 'wide' >
+  <%= image_tag '/images/captions/projectsTitle.png', :alt =>'Проекты'%><br />
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>  
+
+<div id='content' style="width:758px">
 
 <% form_for(@project, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </p>
   <p>
     <%= f.label :description %><br />
-    <%= f.text_area :description %><br/>
+    <%= f.text_area :description, :rows=>2, :cols=>23 %><br/>
     Thumb <%= f.file_field :thumb %>
     </p>
-<h2>Photos</h2>
+<p>Photos</p>
+<table><tr>
 <% @project.attached_photos.each do |photo| %>
-  <div>
-    <b>Photo file name:</b>
-    <%=h photo.photo_file_name %><br>
+  <td>
     <% if photo.photo.exists? then %>
-      <%= photo.id %>
-      <%= image_tag photo.photo.url %>
+      
+      <%= image_tag photo.photo.url %><br />
       <%= link_to 'Delete', project_attached_photo_path(@project, photo), :method => :delete, :confirm => "Are you sure?"%>
+      
     <% else %>
-       There are no photo's attached, upload one.
+       Missed photo.
     <% end %>
-  </div>
-  
-
-    <hr />
+  <td>
 <% end %>
+<td><%= link_to 'New Photo', new_project_attached_photo_path(@project) %></td>
+</tr></table>
 
-<%= link_to 'New Photo', new_project_attached_photo_path(@project) %>
-<br />
-  
-  <%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select author"}) %>
-  
-  <p>
-    <%= f.label :date %><br />
+<p>
+Author:<%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select author"}) %>
+ </p> 
+<p>
+    <%= f.label :date %>
     <%= f.date_select :date %>
-  </p>
-  <p>
+</p>
+
     <%= f.submit 'Update' %>
-  </p>
+
 <% end %>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+</div>

@@ -1,30 +1,73 @@
-<h1>Edit User info</h1>
- 
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
+<% end %>
+<div id='mainHeader' class = 'wide' >
+  <%= image_tag '/images/captions/studioTitle.png', :alt =>'Студия'%><br />
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>  
+
+<div id='content' style="width:758px">
+
 <% form_for @user, :url => account_path, :html => { :multipart => true } do |form| %>
-  <%= form.error_messages %>
-  <%= form.label :login %><br />
-<%= form.text_field :login %><br />
-<%= form.label :name %><br />
-<%= form.text_field :name %><br />
-<%= form.label :surname%><br />
-<%= form.text_field :surname%><br />
-<%= form.label :description%><br />
-<%= form.text_field :description%><br />
+<%= form.error_messages %>
+<center>
+<table>
+  <tr>
+    <td>Логин:</td>
+    <td><%= form.text_field :login %><br /></td>
+  </tr>
+  
+  <tr>
+    <td>Имя:</td>
+    <td><%= form.text_field :name %><br /></td>
+  </tr>
+  
+  <tr>
+    <td>Фамилия:</td>
+    <td><%= form.text_field :surname%><br /></td>
+  </tr>
+  
+  <tr>
+    <td>Описание:</td>
+    <td><%= form.text_area :description, :rows=>2, :cols=>23  %><br /></td>
+  </tr>
+  
+  <tr>
+    <td>Дата рождения:</td>
+    <td><%= form.date_select :birth_date, :start_year =>1980, :end_year => 1990 %></td>
+  </tr>
+  
+  <tr>
+    <td>Иконка:</td>
+    <td><%= form.file_field :thumb %></td>
+  </tr>
+  
+  <tr>
+    <td>Фотография:</td>
+    <td><%= form.file_field :photo %></td>
+  </tr>
+  
+  <tr>
+    <td>Админ?</td>
+    <td><%= form.check_box :is_admin %></td>
+  </tr>
+  
+  <tr>
+    <td><%= form.label :password, form.object.new_record? ? nil : "Изменить пароль:" %></td>
+    <td><%= form.password_field :password %><br /></td>
+  </tr>
+  
+  <tr>
+    <td><%= form.label :password_confirmation, 'Подтвердить пароль:' %></td>
+    <td><%= form.password_field :password_confirmation %></td>
+  </tr>
+  
+ </table>
 
-<%= render :partial => 'thumb_form', :locals => { :form => form } %>
-Photo <%= form.file_field :photo %>
-
-Admin?
-<%= form.check_box :is_admin %><br />
-<br />
-<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
-<%= form.password_field :password %><br />
-<br />
-<%= form.label :password_confirmation %><br />
-<%= form.password_field :password_confirmation %><br />
-<br />
   <%= form.submit "Update" %>
+  </center>
 <% end %>
  
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+
+
+</div>

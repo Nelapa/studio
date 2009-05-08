@@ -1,17 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  
   map.resources :attached_photos
-
-  #map.resources :photos
-
   map.resource :account, :controller => "users"
-  
   map.resources :users
-
-map.resources :projects, :has_many => :attached_photos
-  
+  map.resources :projects, :has_many => :attached_photos
   map.resource :user_session
   
-  map.root :controller => "projects", :action => "index"
+  map.contacts 'contacts', :controller => 'statics', :action => 'contacts'
+  
+  map.root :controller => 'statics', :action => 'index'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

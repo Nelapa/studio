@@ -1,0 +1,490 @@
+/*
+© StudioDAS, Saint-Petersburg, 2009
+Made by liubov nelapa
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html
+{
+	height: 100%;
+}
+
+body
+{
+	font-size: 11pt;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: white;
+	color: RGB(35, 57, 0);
+	font-family: "Century Gothic", Verdana, Arial, Helvetica, sans-serif;
+}
+
+a 
+{
+	outline: 0px;
+}
+
+h1, h2, h3
+{font-weight: normal;}
+
+#page
+{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: middle;
+}
+
+#page tr td
+{
+  vertical-align: middle;
+}
+
+#pageHeader
+{
+	text-align: right;
+}
+
+#pageCenter
+{
+	height: 435px;
+	background-color: RGB(142,200,1);
+}
+#pageBody
+{
+	width: 758px;
+	height: 435px;
+	margin: 0 auto;
+	/*background-color: RGB(151,209,1);*/
+	background-image: url(/images/background.png);
+	background-repeat: repeat;
+}
+
+#pageBody a
+{
+	text-decoration: none;
+	color: white;
+}
+
+#logo
+{
+	height: 62px;
+	padding: 30px 0px 12px 15px;
+	float: left;
+}
+
+.shadable
+{
+	float: left;
+}
+
+.shadable_hidden
+{
+	display: none;
+	float:left;
+}
+
+.shadable_hidden img
+{
+	display: none;
+}
+
+.shadable:hover
+{
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity=50);	
+}
+
+.hidden
+{
+	display: none;
+}
+
+#mainHeader
+{
+	width: 175px;
+	height: 51px;
+	max-height: 51px;
+	float: right;
+	text-align: right;
+	padding: 30px 15px 0px 0px;
+	margin-bottom: 0;
+}
+
+#mainHeader.wide
+{
+	width: 630px;
+}
+
+#comment
+{
+	margin-top: 5px;
+}
+
+#content
+{
+	clear: both;
+	height: 299px;
+	max-width: 758px;
+	padding: 0 15px;
+	vertical-align: middle;
+	color: RGB(35, 57, 0)
+}
+
+#menu 
+{
+	float: right;
+	margin: 2px 15px 1px 0;
+	clear: both;
+	list-style-type: none;
+	display:inline;	
+}
+
+#menu li
+{
+	display: inline;
+	float: left;
+	padding: 0 0 0 45px;
+	width: 72px;
+	height: 17px;
+}
+
+#menu li a
+{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+#studioMenu
+{
+	background-image: url("/images/captions/studioMenu.png");
+	background-repeat: no-repeat;
+	background-color: yellow;	
+}
+
+#studioMenu:hover
+{
+	background-image: url("/images/captions/studioMenuChecked.png");
+}
+
+#projectsMenu
+{
+	background-image: url("/images/captions/projectsMenu.png");
+	background-repeat: no-repeat;
+}
+
+#projectsMenu:hover
+{
+	background-image: url("/images/captions/projectsMenuChecked.png");
+}
+#contactsMenu
+{
+	background-image: url("/images/captions/contactsMenu.png");
+	background-repeat: no-repeat;
+}
+
+#contactsMenu:hover
+{
+	background-image: url("/images/captions/contactsMenuChecked.png");
+}
+
+#copyright
+{
+  font-size: 7pt;
+  clear: both;
+  width: 758px;
+}
+
+#pageFooter
+{
+	min-height: 0px;
+	width: 758px;
+	text-align: left;
+	margin: 1 auto;
+}
+
+#indImg
+{
+	width: 549px;
+	height: 353px;
+	margin: 25px 0 25px 9px;
+	float: left;
+}
+
+#contImg
+{
+	width: 142px;
+	height: 32px;
+	padding: 55px 33px;
+	float: right;
+}
+
+#studioImg
+{  
+	width: 224px;
+	height: 158px;
+	margin: 0 30px 0 0;
+	float: left;
+}
+
+#description
+{
+	height: 196px;
+	width: 516px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+
+#description p
+{
+	float: right;
+	width: 262px;
+	font-size: 11pt;
+	text-align: justify;
+}
+
+#people
+{
+	width: 549px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.section
+{
+	width: 100%;
+	height: 63px;
+	padding: 6px 0 0 0;
+	border: 0;
+	clear: both;
+}
+
+.caption
+{
+	width: 193px;
+	float: left;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.caption h3
+{
+	font-size: 12pt;
+	font-weight: normal;
+	margin-top: 18px;
+}
+
+.caption h3 img
+{
+	margin-top: 5px;
+}
+
+.projects
+{
+	float: left;
+	height: 63px;
+	width: 489px;
+	overflow:hidden;
+}
+
+#people a
+{
+	width: 59px;
+	height: 59px;
+	margin: 0 16px;
+	padding: 0;
+}
+
+.projects a
+{
+	margin: 0 11px;
+	padding: 0;
+	display:inline-block;
+}
+
+.preview
+{
+	width: 59px;
+	height: 59px;
+	max-width: 59px;
+	max-height: 59px;  
+} 
+/* arrows */
+.arrow
+{
+	display:block;
+	width: 12px;
+	height: 19px;
+	padding: 5px 3px;		
+}
+
+.arrow:hover
+{
+	width: 18px;
+	height: 29px;
+	padding: 0;
+}
+
+.arrow img
+{
+	width: 100%;
+	height: 100%;
+}
+
+.lArrowPers 
+{
+	padding: 0px 23px 0 82px;
+	float: left;
+}
+
+.rArrowPers 
+{
+  padding: 0px 82px 0px 0px;
+  float: right;
+}
+
+
+.lArrowPers a, .lArrowProj a
+{
+  margin-top: 113px;
+}
+
+.rArrowPers a
+{
+  margin-top: 136px;
+}
+
+.lArrowProj
+{
+  padding: 0 3px 0 15px;
+  float: left;
+}
+
+.rArrowProj
+{
+  width: 23px;
+  padding: 0 15px 0 3px;
+  float: right;
+}
+
+.rArrowProj a
+{
+  margin-top: 217px;
+  margin-left: 5px;
+  float: right;
+}
+
+.lArrowProjs, .rArrowProjs
+{
+  float: left;
+}
+
+.lArrowProjs a img , .rArrowProjs a img
+{
+  margin-top: 15px;
+}
+
+/* /arrows */
+
+#name
+{
+	line-height: 300%;
+	font-size: 12pt;
+}
+
+#personImg
+{
+	width: 207px;
+	height: 302px;
+	float: right;
+	margin: 0px 0 0px 0px;
+	text-align: center;
+}
+
+#personDesc
+{
+	height: 302px;
+	float: right;
+	width: 270px;
+	margin: 20px 16px 0px 40px;
+	font-size: 11pt;
+	font-weight: normal;
+	text-align: justify;
+} 
+
+#projectImg
+{
+	width: 498px;
+	height: 320px;
+	float: right;
+	margin: 59px 3px 0px 0px;
+}
+
+#projectDesc
+{
+	height: 289px;
+	float: left;
+	width: 160px;
+	margin: 10px 5px 0 3px;
+	font-size: 11pt;
+	font-weight: normal;
+	text-align: justify;
+}
+
+#projectDesc a
+{
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: RGB(35, 57, 0);
+	margin-top: 5px;
+}
+
+#projectDesc a:hover
+{
+	text-decoration: underline;
+}
+
+#upArrow
+{
+	display: block;
+	float: left;
+	clear: both;
+	height: 13px;
+	width:14px;
+	margin: 95px 0 0 0;
+	background-image: url("/images/up.png");
+	background-repeat: no-repeat;	
+}
+
+#upArrow:hover
+{
+	background-image: url("/images/upSelected.png");
+}
+
+#downArrow
+{
+	display: block;
+	float: left;
+	clear: both;
+	height: 13px;
+	width:14px;
+	margin: 0;
+	background-image: url("/images/down.png");
+	background-repeat: no-repeat;	
+}
+
+#downArrow:hover
+{
+	background-image: url("/images/downSelected.png");
+}

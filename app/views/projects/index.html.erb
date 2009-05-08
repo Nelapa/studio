@@ -1,4 +1,13 @@
-<h1>Listing projects</h1>
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
+<% end %>
+<div id='mainHeader' class = 'wide' >
+  <%= image_tag '/images/captions/projectsTitle.png', :alt =>'Проекты'%><br />
+  <%= image_tag '/images/captions/comment.png', :alt =>'Групппа молодых дизайнеров', :id=>'comment' %>
+</div>  
+
+<div id='content' style="width:758px">
+<center>
 
 <table border=2>
   <tr>
@@ -6,6 +15,9 @@
     <th>Title</th>
     <th>Description</th>
     <th>Date</th>
+    <th></th>
+    <th></th>
+    <th><%= link_to 'New project', new_project_path %></th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -24,7 +36,8 @@
   </tr>
 <% end %>
 </table>
-
+</center>
 <br />
 
-<%= link_to 'New project', new_project_path %>
+
+</div>

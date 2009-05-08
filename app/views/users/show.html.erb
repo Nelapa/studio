@@ -1,42 +1,37 @@
-<p>
-  <b>Login:</b>
-  <%=h @user.login %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%=h @user.login %>
-</p>
-
-<p>
-  <b>Surname:</b>
-  <%=h @user.login %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @user.description %>
-</p>
-
-<% if @user.thumb.exists? then %>
-<p>Thumb:<%= image_tag @user.thumb.url %></p>
-<% else %>
-<p> There are no photo's attached, upload one. </p>
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
 <% end %>
+<div id='mainHeader' class = 'wide' >
+  <%= image_tag '/images/captions/studioTitle.png', :alt =>'Студия'%><br />
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>   
 
-<% if @user.photo.exists? then %>
-<p>Thumb:<%= image_tag @user.photo.url %></p>
-<% else %>
-<p> There are no photo's attached, upload one. </p>
-<% end %>
+<div class='rArrowPers'>
+  <a href='#' class='arrow'>
+    <%= image_tag '/images/rightArrow.png', :alt =>'Предыдущий' %>
+  </a>
+</div>
 
-
-<%if @user.is_admin %>
-<p>Is admin</p>
-<%end%>
+<div id='personDesc'>
+  <p id='name'><%= h(@user.name+' '+@user.surname) %></p>
+  <p><%= @user.birth_date%></p>
+  <p><%=h @user.description %></p>
+  
+  <%if @user.is_admin %>
+  <p>Is admin</p>
+  <%end%>
  
-<% if current_user && (current_user.is_admin||@user.id==current_user.id) %>
-<%= link_to 'Edit', edit_user_path(@user) %>|
-<% end %>
+  <% if current_user && (current_user.is_admin||@user.id==current_user.id) %>
+  <%= link_to 'Edit', edit_user_path(@user) %>
+  <% end %>
 
-<%= link_to 'All users', users_path %>
+</div>
+<div id='personImg'> 
+  <%= image_tag @user.photo.url(:cut), :alt=> h(@user.name+' '+@user.surname)%>
+</div>
+
+<div class='lArrowPers'>
+ <a href='#' class='arrow'>
+     <%= image_tag '/images/leftArrow.png', :alt =>'Следующий' %>
+  </a>
+</div> 
