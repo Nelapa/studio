@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Login successful!"
+      flash[:notice] = "Добро пожаловать, " + User.find(@user_session.user).name + "!"
       current_user
       redirect_back_or_default root_url #account_url
     else
@@ -20,7 +20,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Logout successful!"
+    flash[:notice] = "Вы вышли!"
     redirect_back_or_default root_url
   end
 

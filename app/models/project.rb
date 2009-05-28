@@ -1,7 +1,9 @@
 class Project < ActiveRecord::Base
   
   validates_presence_of :title, :description, :author_id
-  
+  validates_inclusion_of :section, :in => 1..4
+
+
   belongs_to :user
   has_many :attached_photos
   

@@ -22,7 +22,8 @@
   <%end%>
  
   <% if current_user && (current_user.is_admin||@user.id==current_user.id) %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
+  <%= link_to 'Edit', edit_user_path(@user) %>|
+  <%= link_to 'Destroy', @user, :confirm => 'Уверены, что хотите удалить архитектора?', :method => :delete %>
   <% end %>
 
 </div>

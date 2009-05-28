@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090507115326) do
+ActiveRecord::Schema.define(:version => 20090528131457) do
 
   create_table "attached_photos", :force => true do |t|
     t.string   "photo_file_name"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20090507115326) do
     t.string   "thumb_file_name"
     t.string   "thumb_content_type"
     t.integer  "thumb_file_size"
+    t.integer  "section"
+    t.string   "place"
   end
 
   create_table "users", :force => true do |t|

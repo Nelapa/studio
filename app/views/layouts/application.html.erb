@@ -3,14 +3,14 @@
  
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=windows-1251" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="description" content="" />
   <meta name="keywords" content="дизайн, архитектура, ремонт, авторский надзор, интерьер, квартира, дом" />
   <%= stylesheet_link_tag 'base' %>
   <%= javascript_include_tag 'script' %>
   <link rel="SHORTCUT ICON" href="images/favicon.png">
   
-  <title><%= controller.controller_name %>: <%= controller.action_name %></title>
+  <title>Studio DAS — <%= controller.controller_name %>: <%= controller.action_name %></title>
 </head>
 
   <body>
@@ -18,11 +18,9 @@
       <tr><td>
         <div id="pageHeader">
           <% if !current_user %>
-          <%= link_to "Register", new_account_path %> |
-          <%= link_to "Log In", new_user_session_path %> |
+          <%= link_to "Войти", new_user_session_path %> 
           <% else %>
-          <%= link_to "My Account", account_path(:id=>current_user.id) %> |
-          <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+          <%= link_to "Выйти", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
           <% end %>
 
           <p style="color: green">

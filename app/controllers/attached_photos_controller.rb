@@ -1,6 +1,7 @@
 class AttachedPhotosController < ApplicationController
-  # POST /attached_photos
-  # POST /attached_photos.xml
+  
+  before_filter :require_user
+
   
   def new
     @attached_photo = AttachedPhoto.new
@@ -12,9 +13,9 @@ class AttachedPhotosController < ApplicationController
     @attached_photo.project_id = params[:project_id];
     
       if @attached_photo.save
-        flash[:notice] = 'AttachedPhoto was successfully created.'
+        flash[:notice] = 'Фотогрфия добавлена.'
       else
-        flash[:error] = 'Error attaching photo'
+        flash[:error] = 'Ошибка при добавлении.'
       end
       redirect_to project_path(Project.find(@attached_photo.project_id))
   end

@@ -3,8 +3,6 @@
 <% form_for(@user, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
-  <%= render :partial => 'thumb_form', :locals => { :form => form } %>
-  Photo <%= form.file_field :photo %>
   <%= f.submit 'Register' %>
   </p>
 <% end %>

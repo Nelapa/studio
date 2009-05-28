@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   
-  before_filter :require_user, :only => [:edit, :update, :destroy]
+  before_filter :require_user, :only => [:new, :create, :edit, :update, :destroy]
   
   # GET /projects
   # GET /projects.xml
@@ -21,18 +21,25 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit
+  def edit #+либо свой, либо админ
     @project = Project.find(params[:id])
-    @attached_photo = AttachedPhoto.new
+    if (!current_user.is_admin && @project.author_id != @current_user.id)
+    flash[:error] = "У Вас нет прав на данное действие!"
+    redirect_back_or_default project_path(@project)
+    end 
+    #@attached_photo = AttachedPhoto.new
   end
 
   # POST /projects
   # POST /projects.xml
-  def create
+  def create #+либо админ, либо только свои
     @project = Project.new(params[:project])
- 
-    if @project.save
-        flash[:notice] = 'Project was successfully created.'
+    if (!current_user.is_admin)
+     @project.author_id = @current_user.id   
+    end
+   
+   if @project.save
+        flash[:notice] = 'Проект успешно создан.'
          #redirect_to(@project) 
          redirect_to new_project_attached_photo_path(@project)
     else
@@ -42,11 +49,16 @@ class ProjectsController < ApplicationController
 
   # PUT /projects/1
   # PUT /projects/1.xml
-  def update
+  def update #+либо свой, либо админ
     @project = Project.find(params[:id])
-
+    
+    if (!current_user.is_admin && @project.author_id != @current_user.id)
+      flash[:error] = "У Вас нет прав на данное действие!"
+      redirect_back_or_default project_path(@project)
+    end 
+  
     if @project.update_attributes(params[:project])
-        flash[:notice] = 'Project was successfully updated.'
+        flash[:notice] = 'Проект успешно обновлён.'
         redirect_to(@project)
     else
         render :action => "edit" 
@@ -55,9 +67,15 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   # DELETE /projects/1.xml
-  def destroy
+  def destroy #+либо свой, либо админ
     @project = Project.find(params[:id])
-    @project.destroy
-    redirect_to(projects_url)  
+   
+    if (!current_user.is_admin && @project.author_id != @current_user.id)
+      flash[:error] = "У Вас нет прав на данное действие!"
+      redirect_back_or_default project_path(@project)
+    else
+      @project.destroy
+    redirect_to(projects_url)
+    end 
   end
 end

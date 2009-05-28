@@ -63,7 +63,7 @@ h1, h2, h3
 	width: 758px;
 	height: 435px;
 	margin: 0 auto;
-	/*background-color: RGB(151,209,1);*/
+	background-color: RGB(151,209,1);
 	background-image: url(/images/background.png);
 	background-repeat: repeat;
 }
@@ -168,8 +168,7 @@ h1, h2, h3
 #studioMenu
 {
 	background-image: url("/images/captions/studioMenu.png");
-	background-repeat: no-repeat;
-	background-color: yellow;	
+	background-repeat: no-repeat;	
 }
 
 #studioMenu:hover
@@ -314,8 +313,8 @@ h1, h2, h3
 
 .preview
 {
-	width: 59px;
-	height: 59px;
+	öwidth: 59px;
+	öheight: 59px;
 	max-width: 59px;
 	max-height: 59px;  
 } 

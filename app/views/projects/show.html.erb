@@ -44,10 +44,7 @@
   <%=h @project.date %>
 </p>
 
-<p>
-  <b>Author:</b>
-  <%=h User.find_by_id(@project.author_id).name %>
-</p>
+
 
 
 <%= link_to 'Edit', edit_project_path(@project) %>
