@@ -1,25 +1,46 @@
+<tr>
+    <td>Логин:</td>
+    <td><%= form.text_field :login, :size => 30, :maxlength => 10 %></td>
+  </tr>
   
-  Иконка:
-<%= form.file_field :thumb %>
- Фото:
-<%= form.file_field :photo %>
-
-
-
-<%= form.label :login %><br />
-<%= form.text_field :login %><br />
-<%= form.label :name %><br />
-<%= form.text_field :name %><br />
-<%= form.label :surname%><br />
-<%= form.text_field :surname%><br />
-<%= form.label :description%><br />
-<%= form.text_field :description%><br />
-Admin?
-<%= form.check_box :is_admin %><br />
-<br />
-<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
-<%= form.password_field :password %><br />
-<br />
-<%= form.label :password_confirmation %><br />
-<%= form.password_field :password_confirmation %><br />
-<br />
+  <tr>
+    <td>Имя:</td>
+    <td><%= form.text_field :name, :size => 30, :maxlength => 120%></td>
+  </tr>
+  
+  <tr>
+    <td>Фамилия:</td>
+    <td><%= form.text_field :surname, :size => 30, :maxlength => 20 %></td>
+  </tr>
+  
+  <tr>
+    <td>Описание:</td>
+    <td><%= form.text_area :description, :rows=>2, :cols=>23  %></td>
+  </tr>
+  
+  <tr>
+    <td>Иконка:</td>
+    <td><%= form.file_field :thumb, :size => 18 %></td>
+  </tr>
+  
+  <tr>
+    <td>Фотография:</td>
+    <td><%= form.file_field :photo, :size => 18 %></td>
+  </tr>
+  
+  <% if current_user.is_admin %>
+  <tr>
+    <td>Админ?</td>
+    <td><%= form.check_box :is_admin %></td>
+  </tr>
+  <% end %>
+  
+  <tr>
+    <td><%= form.label :password, form.object.new_record? ? 'Пароль:' : "Изменить пароль:" %></td>
+    <td><%= form.password_field :password %><br /></td>
+  </tr>
+  
+  <tr>
+    <td><%= form.label :password_confirmation, 'Подтвердить пароль:' %></td>
+    <td><%= form.password_field :password_confirmation %></td>
+  </tr>

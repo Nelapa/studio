@@ -1,52 +1,51 @@
-<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+<% link_to root_path, :class=> 'shadable', :id=>'logo', :style => 'width:190px;' do %>
   <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
 <% end %>
-<div id='mainHeader' class = 'wide' >
-  <%= image_tag '/images/captions/projectsTitle.png', :alt =>'Проекты'%><br />
-  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
-</div>  
 
-<div id='content' style="width:758px">
+<div class='rArrowProj'>
+  <% link_to project_path(@project.next), :class => 'arrow' do %>
+    <%= image_tag '/images/rightArrow.png', :alt =>'Следующий', :title => 'Следующий' %>
+  <% end %>
+<br />
+  <a href='#' id='upArrow' title='Предыдущее фото' onclick='changeProjectImage("back")'></a><br />
+  <a href='#' id='downArrow' title='Слудующее фото'  onclick='changeProjectImage("forward")'></a>
 
-<p>
-  <b>Title:</b>
-  <%=h @project.title %>
-</p>
+</div>
 
-<p>
-  <b>Description:</b>
-  <%=h @project.description %>
-</p>
+<div id='projectImg'><table><tr><td><center>
 
-<% if @project.thumb.exists? then %>
-<p><b>Thumb</b></p>
-<p><%= image_tag @project.thumb.url %></p>
-
-<% else %>
-<p> There are no photo's attached, upload one. </p>
-<% end %>
-
-<p>
-
-
-
-<% @project.attached_photos.each do |photo| %>
+  <% @project.attached_photos.each do |photo| %>
     <% if photo.photo.exists? then %>
-       <%= image_tag photo.photo.url %>
+       <%= image_tag photo.photo.url(:cut), :class => (photo.position>1 ? 'hidden'  : ""), :title => "#{photo.position} из #{@project.attached_photos.length}" %>
     <% end %>
  <% end %>
 
-</p>
+</center></td></tr></table></div>
 
-
-<p>
-  <b>Date:</b>
-  <%=h @project.date %>
-</p>
-
-
-
-
-<%= link_to 'Edit', edit_project_path(@project) %>
-
+<div class='lArrowProj'>
+<% link_to project_path(@project.prev), :class => 'arrow' do %>
+  <%= image_tag '/images/leftArrow.png', :alt =>'Предыдущий', :title => 'Предыдущий'  %>
+<% end %>
 </div>
+
+<div id='projectDesc'>
+
+  <p id="projectTitle">
+    <%=h @project.title %>
+  </p>
+  <% if @project.place && @project.place.length>0 %>
+  <p id = 'place'>
+    Место расположения:
+    <%=h @project.place%>
+  </p>
+  <% end %>
+  <p>
+    <%=h @project.description %>
+  </p><p id="date">
+    <%=h @project.date%>
+  </p><p>
+   <% if @user = User.find_by_id(@project.author_id) %>
+  <%= link_to h(@user.name + " " + @user.surname), user_path(@user), :title => "На страницу автора"%>
+  <% end %>
+    </p>
+  </div>

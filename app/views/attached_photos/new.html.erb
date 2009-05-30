@@ -1,8 +1,17 @@
-<h1>New attached_photo</h1>
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
+<% end %>
+<div id='mainHeader'>
+  <%= image_tag '/images/captions/projectsTitle.png', :alt =>'Студия' %>
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>   
+<div id='content' style="text-align: center">
+<h2 style="text-align: center">Добавление фотографии</h2>
 <% form_for(@attached_photo, :attached_photo, :url => project_attached_photos_path(@project),:html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
-  <%= f.label 'Photo' %><br />
-  <%= f.file_field :photo %>
-  <%= f.submit 'Create' %>
+  <%= f.error_messages %><br />
+  <%= f.file_field :photo %><br /><br />
+  <%= f.submit 'Добавить' %>
   </p>
 <% end %>
+
+</div>

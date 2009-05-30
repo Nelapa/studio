@@ -5,7 +5,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.all
+    @projects = Array.new;
+    4.times do |i|
+      @projects[i] = Project.find(:all, :conditions => 'section_id = '+(i+1).to_s, :order => 'position ASC')
+    end
   end
 
   # GET /projects/1
@@ -34,6 +37,15 @@ class ProjectsController < ApplicationController
   # POST /projects.xml
   def create #+либо админ, либо только свои
     @project = Project.new(params[:project])
+    
+    @projects = Project.find(:all, :conditions=> "section_id = " + @project.section_id.to_s, :order => "position ASC")
+    
+  if @projects.length >0
+      @project.position = @projects.last.position+1
+  else
+    @project.position = 1
+  end
+    
     if (!current_user.is_admin)
      @project.author_id = @current_user.id   
     end
@@ -74,8 +86,21 @@ class ProjectsController < ApplicationController
       flash[:error] = "У Вас нет прав на данное действие!"
       redirect_back_or_default project_path(@project)
     else
+      photos = AttachedPhoto.find(:all, :conditions => "project_id = " + @project.id.to_s)
+      if (photos.length >0)
+        photos.each do |photo|
+          photo.destroy
+        end
+      end
       @project.destroy
-    redirect_to(projects_url)
+      redirect_to(projects_url)
     end 
-  end
+  end 
+
+  def move
+    if ["move_lower", "move_higher", "move_to_top", "move_to_bottom"].include?(params[:method]) and params[:id] =~ /^\d+$/
+      Project.find(params[:id]).send(params[:method])
+    end
+    redirect_to edit_project_path(:id => params[:id])
+  end 
 end

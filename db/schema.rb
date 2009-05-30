@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090528131457) do
+ActiveRecord::Schema.define(:version => 20090529235403) do
 
   create_table "attached_photos", :force => true do |t|
     t.string   "photo_file_name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20090528131457) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
+    t.integer  "position"
   end
 
   create_table "projects", :force => true do |t|
@@ -30,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20090528131457) do
     t.string   "thumb_file_name"
     t.string   "thumb_content_type"
     t.integer  "thumb_file_size"
-    t.integer  "section"
+    t.integer  "section_id"
     t.string   "place"
+    t.integer  "position"
   end
 
   create_table "users", :force => true do |t|
@@ -42,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20090528131457) do
     t.string   "perishable_token"
     t.string   "name"
     t.string   "surname"
-    t.date     "birth_date"
     t.text     "description"
     t.boolean  "is_admin"
     t.datetime "created_at"
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20090528131457) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
+    t.integer  "position"
   end
 
 end

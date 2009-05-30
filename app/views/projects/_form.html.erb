@@ -1,0 +1,36 @@
+<table style="text-align: left;">
+  <tr>
+    <td>Название: </td>
+    <td><%= form.text_field :title, :size =>30 ,:maxlength =>50 %></td>
+  </tr>
+
+  <tr>
+    <td>Место: </td>
+    <td><%= form.text_field :place,  :size =>30, :maxlength =>70 %></td>
+  </tr>
+  
+  <tr>
+    <td>Описание: </td>
+    <td><%= form.text_area :description, :rows=>3, :cols=>23 %></td>
+  </tr>
+
+  <tr>
+    <td>Дата: </td>
+    <td><%= form.date_select :date %></td>
+  </tr>
+
+  <tr>
+    <td>Автор: </td>
+    <td><%= collection_select(:project, :author_id, User.all, :id, :name, {:selected => current_user.id}) %></td>
+  </tr>
+
+  <tr>
+    <td>Раздел: </td>
+    <td><%= select(:project, :section_id, [["Архитектура", 1], ["Дизайн интерьера", 2], ["Дизайн среды", 3], ["Графический дизайн", 4]], {:selected => 1})%></td>
+  </tr>
+  
+  <tr>
+    <td>Иконка: </td>
+    <td><%= form.file_field :thumb, :size=> 18 %></td>
+  </tr>
+</table>

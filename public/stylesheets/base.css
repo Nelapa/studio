@@ -16,7 +16,7 @@ html
 
 body
 {
-	font-size: 11pt;
+	font-size: 10pt;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -30,8 +30,13 @@ a
 	outline: 0px;
 }
 
-h1, h2, h3
-{font-weight: normal;}
+h1, h2, h3, h4
+{
+	font-weight: bold;
+	text-align: center;
+}
+
+
 
 #page
 {
@@ -51,6 +56,22 @@ h1, h2, h3
 #pageHeader
 {
 	text-align: right;
+}
+
+#pageHeader a
+{
+	color: RGB(35, 57, 0);
+	margin-left: 10px;
+}
+
+#pageHeader a:hover
+{
+	color: RGB(142,200,1);
+}
+
+#pageHeader a
+{
+	color: RGB(35, 57, 0);
 }
 
 #pageCenter
@@ -99,8 +120,8 @@ h1, h2, h3
 
 .shadable:hover
 {
-	opacity: 0.5;
 	-moz-opacity: 0.5;
+	opacity: 0.5;
 	filter: alpha(opacity=50);	
 }
 
@@ -209,7 +230,7 @@ h1, h2, h3
 	min-height: 0px;
 	width: 758px;
 	text-align: left;
-	margin: 1 auto;
+	margin: 1px;
 }
 
 #indImg
@@ -248,7 +269,7 @@ h1, h2, h3
 {
 	float: right;
 	width: 262px;
-	font-size: 11pt;
+	font-size: 10pt;
 	text-align: justify;
 }
 
@@ -313,8 +334,8 @@ h1, h2, h3
 
 .preview
 {
-	öwidth: 59px;
-	öheight: 59px;
+	/*width: 59px;
+	height: 59px;*/
 	max-width: 59px;
 	max-height: 59px;  
 } 
@@ -398,7 +419,8 @@ h1, h2, h3
 #name
 {
 	line-height: 300%;
-	font-size: 12pt;
+	font-size: 11pt;
+	font-weight: bold;
 }
 
 #personImg
@@ -416,17 +438,28 @@ h1, h2, h3
 	float: right;
 	width: 270px;
 	margin: 20px 16px 0px 40px;
-	font-size: 11pt;
+	font-size: 10pt;
 	font-weight: normal;
 	text-align: justify;
+	overflow:hidden;
 } 
 
 #projectImg
 {
+	overflow: hidden;
 	width: 498px;
-	height: 320px;
+	height: 351px;
 	float: right;
-	margin: 59px 3px 0px 0px;
+	margin: 40px 3px 0px 0px;
+}
+
+#projectImg table tr td
+{
+	overflow: hidden;
+	width: 498px;
+	height: 351px;
+	vertical-align: middle;
+	text-align: center;
 }
 
 #projectDesc
@@ -435,9 +468,10 @@ h1, h2, h3
 	float: left;
 	width: 160px;
 	margin: 10px 5px 0 3px;
-	font-size: 11pt;
+	font-size: 10pt;
 	font-weight: normal;
-	text-align: justify;
+	text-align: right;
+	overflow:hidden;
 }
 
 #projectDesc a
@@ -452,6 +486,26 @@ h1, h2, h3
 #projectDesc a:hover
 {
 	text-decoration: underline;
+}
+
+
+#projectTitle
+{
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 10pt;
+}
+
+
+#date
+{
+	margin-top: 5px;
+}
+
+#place
+{
+	font-size: 7pt;
+	margin-bottom: 5px;
 }
 
 #upArrow
@@ -486,4 +540,46 @@ h1, h2, h3
 #downArrow:hover
 {
 	background-image: url("/images/downSelected.png");
+}
+
+.photo_edit
+{
+	float: left;
+	font-size: 7pt;
+	text-align: center;
+	margin: 1px;
+	padding: 1px;
+	border: solid white 1px;
+}
+
+#photos_edit
+{
+	height: 200px;
+	overflow: auto;
+}
+
+.errorExplanation
+{
+	font-size: 7pt;
+	color: red;
+	text-align: left;
+}
+
+.errorExplanation h2
+{
+	display: none;
+	font-size: 8pt;
+	text-align: left;
+}
+
+.errorExplanation ul
+{
+	list-style-type: square;
+}
+
+formTable
+{
+	display: block;
+	height: 150px;
+	overflow: scroll;
 }

@@ -7,22 +7,48 @@
   <meta name="description" content="" />
   <meta name="keywords" content="дизайн, архитектура, ремонт, авторский надзор, интерьер, квартира, дом" />
   <%= stylesheet_link_tag 'base' %>
-  <%= javascript_include_tag 'script' %>
-  <link rel="SHORTCUT ICON" href="images/favicon.png">
+  <% if controller.controller_name == "projects" %>
+    <%= javascript_include_tag 'script' %>
+  <% end %> 
+  <link rel="SHORTCUT ICON" href="/images/favicon.png" />
   
   <title>Studio DAS — <%= controller.controller_name %>: <%= controller.action_name %></title>
 </head>
 
-  <body>
+  <body  
+  <% if controller.controller_name == "projects" and controller.action_name == "show" %>
+    onload='wheelInitialize()'
+  <% end %>
+  >
     <table id="page">
       <tr><td>
         <div id="pageHeader">
-          <% if !current_user %>
-          <%= link_to "Войти", new_user_session_path %> 
-          <% else %>
-          <%= link_to "Выйти", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+          <% if current_user %>
+            <% if controller.controller_name == "projects" %>
+              <% if controller.action_name == "show" && (current_user.is_admin || current_user.id==@project.author_id) %>
+                <%= link_to 'Редактировать', edit_project_path(@project) %>
+                <%= link_to 'Удалить', project_path(@project), :method => :delete, :confirm => "Вы уверены?" %>
+              <% elsif controller.action_name == "index" %>
+                <%= link_to 'Новый проект', new_project_path %>
+              <% elsif controller.action_name == "edit" %>
+                <%= link_to 'К проекту', project_path %>
+              <% end %>
+            <% elsif controller.controller_name == "users" %>
+              <% if controller.action_name == "show" %>
+                <% if current_user.is_admin || current_user.id == @user.id %>
+                  <%= link_to 'Редактировать', edit_user_path(@user) %>
+                <% end %>
+                <% if current_user.is_admin %>
+                  <%= link_to 'Удалить', user_path(@user), :method => :delete, :confirm => "Вы уверены?" %>
+                <% end %>
+              <% elsif controller.action_name == "index" && current_user.is_admin %>
+                <%= link_to 'Новый архитектор', new_user_path %>
+                <% elsif controller.action_name == "edit" %>
+                <%= link_to 'К данным архитектора', project_path %>
+              <% end %>
+            <% end %>
           <% end %>
-
+          
           <p style="color: green">
             <%= flash[:notice]%></p>
           <p style="color: red">

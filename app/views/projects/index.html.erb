@@ -6,38 +6,49 @@
   <%= image_tag '/images/captions/comment.png', :alt =>'Групппа молодых дизайнеров', :id=>'comment' %>
 </div>  
 
-<div id='content' style="width:758px">
-<center>
+<div id='content'>
 
-<table border=2>
-  <tr>
-    <th>Thumb</th> 
-    <th>Title</th>
-    <th>Description</th>
-    <th>Date</th>
-    <th></th>
-    <th></th>
-    <th><%= link_to 'New project', new_project_path %></th>
-  </tr>
+  <% 4.times do |i| %>
 
-<% @projects.each do |project| %>
-  <tr>
-    <td>
-      <% if project.thumb.exists? then %>
-        <%= image_tag project.thumb.url %>
+  <div class='section'>
+    <div class='caption'>
+      <h3>
+        <% if i==0 %>
+          <%= image_tag '/images/captions/architecture.png', :alt => 'Архитектура'%>
+        <% elsif i==1 %>
+          <%= image_tag '/images/captions/interiorDesign.png', :alt => 'Дизайн интерьера'%>
+        <% elsif i==2 %>
+          <%= image_tag '/images/captions/exteriorDesign.png', :alt => 'Дизайн среды'%>
+        <% elsif i==3 %>
+          <%= image_tag '/images/captions/graphicsDesign.png', :alt => 'Графический дизайн'%>
+        <% end %>
+        </h3>
+    </div>
+
+    <div class='lArrowProjs'>
+      <a href='#' class='arrow' onclick="move(<%= '\'sect' + i.to_s + '\''%>,'back');"><img src='images/leftArrow.png' alt='Предыдущий' /></a>
+    </div>
+
+    <div class='projects' id=<%= '\'sect' + i.to_s + '\''%>>
+
+      <% @projects[i].each do |project| %>
+
+        <% link_to project_path(project), :class => (project.position<=6) ? 'shadable' :'shadable_hidden', :style => (project.position<=6) ? '' :'display: none' do %>
+          <% if project.thumb.exists? then %>
+            <%= image_tag project.thumb.url(:thumb), :alt =>'Проект', :title => h(project.title), :class =>'preview' %>
+          <% else %>
+            Проект
+          <% end %>
+        <% end %>
+  
       <% end %>
-    </td>
-    <td><%=h project.title %></td>
-    <td><%=h project.description %></td>
-    <td><%=h project.date %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, :confirm => 'Уверены, что хотите удалить проект?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-</center>
-<br />
+    </div>
 
+    <div class='rArrowProjs' onclick="move(<%= '\'sect' + i.to_s + '\''%>,'forward');">
+      <a href='#' class='arrow'><img src='/images/rightArrow.png' alt='Следующий' /></a>
+    </div>
+  </div>
+
+  <% end %>
 
 </div>

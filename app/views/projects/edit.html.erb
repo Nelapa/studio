@@ -6,47 +6,63 @@
   <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
 </div>  
 
-<div id='content' style="width:758px">
+<div id='content'>
 
-<% form_for(@project, :html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
+<h2>Изменение данных проекта</h2>
+<center>
 
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description, :rows=>2, :cols=>23 %><br/>
-    Thumb <%= f.file_field :thumb %>
-    </p>
-<p>Photos</p>
-<table><tr>
+<% form_for(@project, :html => { :multipart => true }) do |form| %>
+  <table  id='formTable'>
+  <tr><td><%= form.error_messages %></td></tr>
+    <tr>
+    <td style = 'border-right: solid white 2px'> 
+
+      <p>
+        <% unless @project.first? %> 
+          <%= link_to "<<", {:action =>'move', :method => 'move_to_top', :id => @project.id } %>|<%= link_to "<", {:action => 'move', :method => 'move_higher', :id => @project.id} %> 
+        <% end %> 
+        Номер в разделе: <%=h @project.position %>
+        <% unless @project.last? %> 
+          <%= link_to ">", {:action => 'move', :method => 'move_lower', :id => @project.id } %>|<%= link_to ">>", {:action => 'move', :method => 'move_to_bottom', :id => @project.id } %> 
+        <% end %>
+      </p>
+      
+      <%= render :partial => "form", :object => form %>
+      <br><%= form.submit 'Сохранить' %>
+    </td>
+    <td>
+
+<h4>Photos</h4>
+<p style="text-align: center" >
+<%= link_to 'New Photo', new_project_attached_photo_path(@project) %>
+</p>
+<div id='photos_edit'>
 <% @project.attached_photos.each do |photo| %>
-  <td>
-    <% if photo.photo.exists? then %>
+    <div class='photo_edit'>
+      <p>
+        <% unless photo.first? %> 
+          <%= link_to "<<", {:controller =>'attached_photos', :action =>'move', :method => 'move_to_top', :id => photo.id, :project_id => @project.id } %>|<%= link_to "<", {:controller =>'attached_photos', :action => 'move', :method => 'move_higher', :id => photo.id, :project_id => @project.id } %> 
+        <% end %> 
+        <%=h photo.position %>
+        <% unless photo.last? %> 
+          <%= link_to ">", {:controller =>'attached_photos', :action => 'move', :method => 'move_lower', :id => photo.id, :project_id => @project.id } %>|<%= link_to ">>", {:controller =>'attached_photos', :action => 'move', :method => 'move_to_bottom', :id => photo.id, :project_id => @project.id } %> 
+        <% end %>
+      </p>
       
-      <%= image_tag photo.photo.url %><br />
-      <%= link_to 'Delete', project_attached_photo_path(@project, photo), :method => :delete, :confirm => "Are you sure?"%>
-      
+      <% if photo.photo.exists? then %>
+        <%= image_tag photo.photo.url(:cut), :class => 'preview' %><br />
     <% else %>
        Missed photo.
-    <% end %>
-  <td>
+    <% end %><br />
+    <%= link_to 'Delete', project_attached_photo_path(@project, photo), :method => :delete, :confirm => "Are you sure?"%>
+    </div>
 <% end %>
-<td><%= link_to 'New Photo', new_project_attached_photo_path(@project) %></td>
-</tr></table>
+</div>
 
-<p>
-Author:<%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select author"}) %>
- </p> 
-<p>
-    <%= f.label :date %>
-    <%= f.date_select :date %>
-</p>
+  </td></tr></table>
 
-    <%= f.submit 'Update' %>
+    
 
 <% end %>
-
+</center>
 </div>

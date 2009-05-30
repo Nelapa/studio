@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => [:edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.find(:all, :order => "position ASC")
   end
 
   # GET /users/1
@@ -23,23 +23,19 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if (current_user && @current_user.is_admin)
-      @user = User.find_by_id(params[:id])
-    else if (current_user && @current_user.id==params[:id])
-      @user = @current_user
-    else
+    @user = User.find_by_id(params[:id])
+    if (!current_user.is_admin && current_user.id!=@user.id)
       flash[:error] = "У вас нет прав на данное действие!"
-      redirect_back_or_default user_path(@user)
+      flash[:notice]=@current_user.id.to_s + " " + params[:id].to_s
+      redirect_to user_path(id=>params[:id])
     end
-    end
-    
-    #@user = @current_user
   end
 
   # POST /users
   def create
        
     @user = User.new(params[:user])
+    @user.position = User.find(:all, :order => "position ASC").last.position+1
     
     if User.find(:all).length==0
       @user.is_admin = true
@@ -65,6 +61,10 @@ class UsersController < ApplicationController
     if (@user.is_admin && User.find(:all, :conditions => "is_admin = true").length==1)
       params[:user][:is_admin]=true;
     end
+    
+    if (!current_user.is_admin)
+      params[:user][:is_admin]=false
+    end
 
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Данные обновлены'
@@ -82,17 +82,23 @@ class UsersController < ApplicationController
     if (!current_user || !@current_user.is_admin || @user.id == @current_user.id)
       flash[:error] = "У Вас нет прав на данное действие!"
       redirect_back_or_default user_path(@user)
-    else
-    if (@user.is_admin &&User.find(:all, :conditions => "is_admin = true").length==1) 
+    else if (@user.is_admin &&User.find(:all, :conditions => "is_admin = true").length==1) 
       flash[:error] = "Нельзя удалить единственного администратора!"
       redirect_back_or_default user_path(@user)
     else
-      Project.find(:all, :conditions=>"author_id="+@user.id).each do |project|
+      Project.find(:all, :conditions=>"author_id = "+@user.id.to_s).each do |project|
         project.update_attribute(:author_id, -1)
-      end
+    end
       @user.destroy
       redirect_to users_path
     end
    end
   end
+   
+  def move
+    if ["move_lower", "move_higher", "move_to_top", "move_to_bottom"].include?(params[:method]) and params[:id] =~ /^\d+$/
+      User.find(params[:id]).send(params[:method])
+    end
+    redirect_to edit_user_path(:id => params[:id])
+  end  
 end

@@ -1,12 +1,23 @@
-<h1>Вход</h1>
+<% link_to root_path, :class=> 'shadable', :id=>'logo', :style => 'width: 500px;' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
+<% end %>
  
-<% form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :login %><br />
+<div id='content'>
+
+<h2 style="text-align: center;">Вход</h2>
+<br>
+ 
+<% form_for @user_session, :url => { :action => "create" } do |f| %>
+  <%= f.error_messages :style=> 'font-size: 8px;'%>
+  <center>
+  <%= f.label :login, 'Логин' %><br />
   <%= f.text_field :login %><br />
   <br />
-  <%= f.label :password %><br />
+  <%= f.label :password, 'Пароль' %><br />
   <%= f.password_field :password %><br />
   <br />
   <%= f.submit "Войти" %>
+  </center>
 <% end %>
+
+</div>

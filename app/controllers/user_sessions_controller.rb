@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       flash[:notice] = "Добро пожаловать, " + User.find(@user_session.user).name + "!"
       current_user
-      redirect_back_or_default root_url #account_url
+      redirect_back_or_default root_url
     else
       render :action => :new
     end

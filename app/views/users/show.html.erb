@@ -6,25 +6,21 @@
   <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
 </div>   
 
+
 <div class='rArrowPers'>
-  <a href='#' class='arrow'>
-    <%= image_tag '/images/rightArrow.png', :alt =>'Предыдущий' %>
-  </a>
+<% link_to user_path(@user.next), :class => 'arrow' do %>
+  <%= image_tag '/images/rightArrow.png', :alt =>'Следующий' %>
+<% end %>
 </div>
 
+
 <div id='personDesc'>
-  <p id='name'><%= h(@user.name+' '+@user.surname) %></p>
-  <p><%= @user.birth_date%></p>
+  <p id='name'><%= h(@user.surname+' '+@user.name) %></p>
   <p><%=h @user.description %></p>
   
-  <%if @user.is_admin %>
-  <p>Is admin</p>
+  <%if current_user and @user.is_admin %>
+  <p>Администратор сайта</p>
   <%end%>
- 
-  <% if current_user && (current_user.is_admin||@user.id==current_user.id) %>
-  <%= link_to 'Edit', edit_user_path(@user) %>|
-  <%= link_to 'Destroy', @user, :confirm => 'Уверены, что хотите удалить архитектора?', :method => :delete %>
-  <% end %>
 
 </div>
 <div id='personImg'> 
@@ -32,7 +28,7 @@
 </div>
 
 <div class='lArrowPers'>
- <a href='#' class='arrow'>
-     <%= image_tag '/images/leftArrow.png', :alt =>'Следующий' %>
-  </a>
-</div> 
+<% link_to user_path(@user.prev), :class => 'arrow' do %>
+  <%= image_tag '/images/leftArrow.png', :alt =>'Предыдущий' %>
+<% end %>
+</div>

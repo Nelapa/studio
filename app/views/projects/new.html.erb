@@ -1,28 +1,18 @@
-<h1>New project</h1>
-
-<% form_for(@project, :html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-     Thumb <%= f.file_field :thumb %>
-  </p>
-  
-  <%= collection_select(:project, :author_id, User.all, :id, :name, options ={:prompt => "-Select author"}) %>
-
-  
-  <p>
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+<% link_to root_path, :class=> 'shadable', :id=>'logo' do %>
+  <%= image_tag '/images/captions/logo.png', :alt =>'Studio DAS' %>
 <% end %>
+<div id='mainHeader' class = 'wide' >
+  <%= image_tag '/images/captions/projectsTitle.png', :alt =>'Студия'%><br />
+  <%= image_tag '/images/captions/comment.png', :alt =>'Группа молодых дизайнеров', :id=>'comment' %>
+</div>  
 
-<%= link_to 'Back', projects_path %>
+<div id='content'>
+<h2>Создание нового проекта</h2><br>
+<center><table  id='formTable'><tr><td>
+<% form_for(@project, :html => { :multipart => true }) do |form| %>
+  <tr><td><%= form.error_messages %></td></tr>
+  <%= render :partial => "form", :object => form %><br />
+  <%= form.submit 'Создать' %>
+<% end %>
+</center></td></tr><table>
+</div>

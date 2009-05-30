@@ -12,10 +12,19 @@ class AttachedPhotosController < ApplicationController
     @attached_photo = AttachedPhoto.new(params[:attached_photo])
     @attached_photo.project_id = params[:project_id];
     
+    @photos = AttachedPhoto.find(:all, :conditions=> "project_id = " + @attached_photo.project_id.to_s, :order => "position ASC")
+    
+  if @photos.length >0
+      @attached_photo.position = @photos.last.position+1
+  else
+    @attached_photo.position = 1
+  end
+    
+    
       if @attached_photo.save
-        flash[:notice] = 'Фотогрфия добавлена.'
+        flash[:notice] = 'Р¤РѕС‚РѕРіСЂР°С„РёСЏ РґРѕР±Р°РІР»РµРЅР°'
       else
-        flash[:error] = 'Ошибка при добавлении.'
+        flash[:error] = 'РћС€РёР±РєР° РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё С„РѕС‚РѕРіСЂР°С„РёРё'
       end
       redirect_to project_path(Project.find(@attached_photo.project_id))
   end
@@ -25,8 +34,16 @@ class AttachedPhotosController < ApplicationController
   def destroy
     @attached_photo = AttachedPhoto.find(params[:id])
     @attached_photo.destroy
-    @project = Project.find(params[:project_id])
-    redirect_to edit_project_path(@project)
+    if @project=Project.find_by_id(@attached_photo.project_id)
+      redirect_back_or_default edit_project_path(@project)
+    end
   end
-  
+
+  def move
+    if ["move_lower", "move_higher", "move_to_top", "move_to_bottom"].include?(params[:method]) and params[:id] =~ /^\d+$/
+      AttachedPhoto.find(params[:id]).send(params[:method])
+    end
+    redirect_to edit_project_path(:id => params[:project_id])
+  end 
+
 end

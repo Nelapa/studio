@@ -1,15 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :attached_photos
-  map.resource :account, :controller => "users"
+  map.resources :attached_photos #delete???
+  
   map.resources :users
   map.resources :projects, :has_many => :attached_photos
-  map.resource :user_session
-  
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
   map.contacts 'contacts', :controller => 'statics', :action => 'contacts'
-  
   map.root :controller => 'statics', :action => 'index'
-
+  
+  #map.resource :user_session
+  #map.resource :account, :controller => "users"
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
